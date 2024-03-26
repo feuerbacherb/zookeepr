@@ -53,6 +53,11 @@ function findById(id, animalsArray) {
   return result;
 }
 
+// parse incoming string or array data
+app.use(express.urlencoded({ extended: true }));
+// parse incoming JSON data
+app.use(express.json());
+
 app.get("/api/animals", (req, res) => {
   let results = animals;
   if (req.query) {
@@ -68,6 +73,12 @@ app.get("/api/animals/:id", (req, res) => {
   } else {
     res.sendStatus(404);
   }
+});
+
+app.post("/api/animals", (req, res) => {
+  // req.body is where our incoming content will be
+  console.log(req.body);
+  res.json(req.body);
 });
 
 app.listen(PORT, () => {
